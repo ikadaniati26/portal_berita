@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 
+
 class menusController extends Controller
 {
     /**
@@ -13,13 +14,38 @@ class menusController extends Controller
      */
     public function index()
     {
-             // Mengambil data menu langsung dari database tanpa model
-             $menus = DB::table('menus')->orderBy('order_no', 'asc')->get();
+        $trendingnow = DB::table('artikel')
+        ->join('kategori', 'artikel.kategori_idkategori', '=', 'kategori.idkategori')
+        ->select('artikel.*', 'kategori.*')->orderBy('create_at','desc')
+        ->where('kategori.status', 'true')
+        ->whereNull('artikel.video')
+        ->get();
+       
+        $berita_utama = DB::table('beritautama')
+            ->join('artikel', 'beritautama.artikel_idartikel', '=', 'artikel.idartikel')
+            ->join('kategori', 'artikel.kategori_idkategori', '=', 'kategori.idkategori')
+            ->select('beritautama.*', 'artikel.judul', 'artikel.image', 'kategori.nama as kategori')
+            ->get();
 
-             // Kirim data ke view
-             return view('website.user.home', compact('menus'));
+        // dd($berita_utama);
+        $berita_video = DB::table('artikel')
+                       ->whereNotNull('video')
+                       ->get();
+        // dd($berita_video);
+        
+    
+        $kategori = DB::table('artikel')
+            ->join('kategori', 'artikel.kategori_idkategori', '=', 'kategori.idkategori')
+            ->select('artikel.judul', 'artikel.image', 'kategori.nama as kategori')
+            ->where('kategori.status', 'true')
+            ->get();
+
+        // Debugging, cek apakah $beritautama ada
+        // dd($kategori);
+    
+        return view('website.user.layout', compact('trendingnow','berita_utama','kategori','berita_video'));
     }
-  
+    
 
     /**
      * Show the form for creating a new resource.

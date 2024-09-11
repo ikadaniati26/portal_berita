@@ -1,4 +1,4 @@
-@extends('website.user.portalberita')
+@extends('website.user.layout')
 
 @section('content')
   <!-- About US Start -->
