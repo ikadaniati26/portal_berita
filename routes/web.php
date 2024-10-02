@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\menusController;
+use App\Http\Controllers\AdminController;
+
 
 
 // Route::get('/', function () {
@@ -18,15 +20,20 @@ Route::view('/dashboardadmin', 'website.admin.dashboard');
 //----------------PENULIS----------------------//
 Route::view('/dashboardjurnalis', 'website.jurnalis.dashboard');
 Route::view('/dataartikel', 'website.jurnalis.artikel');
-Route::view('/inputartikel', 'website.jurnalis.forminputartikel');
+Route::view('/form-input', 'website.jurnalis.forminputartikel');
+Route::get('/artikel', [AdminController::class, 'index'])->name('artikel');
 
 //----------------  USER----------------------//
 Route::get('/', [menusController::class, 'index']);
-
-Route::view('/category', 'website.user.layout');
-Route::view('/about', 'website.user.about');
 Route::view('/beritaterbaru', 'website.user.beritaterbaru');
 Route::view('/contact', 'website.user.contact');
+Route::post('/store', [menusController::class, 'store'])->name('store');
+
+
+
+
+
+
 
 
 

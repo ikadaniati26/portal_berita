@@ -1,31 +1,65 @@
 @extends('website.main.layout')
 
 @section('content')
-<div class="container mt-5">
-    <h2>Create New Content</h2>
-    <form action="" method="POST">
-        @csrf
-        <div class="form-group">
-            <label for="content">Content</label>
-            <textarea id="content-editor" name="content" class="form-control"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary mt-3">Submit</button>
-    </form>
-</div>
-@endsection
 
-@section('scripts')
-<script src="https://cdn.jsdelivr.net/npm/@tinymce/tinymce-webcomponent@2/dist/tinymce-webcomponent.min.js"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        tinymce.init({
-            selector: '#content-editor',
-            plugins: 'advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table code help wordcount',
-            toolbar: 'undo redo | blocks | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
-            height: 500,
-            menubar: false,
-            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
-        });
-    });
-</script>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="text-center">Form Input Artikel</h3>
+                </div>
+                <div class="card-body">
+                    <form method="post" action="store">
+                        @csrf <!-- CSRF token untuk keamanan -->
+                         <!-- Judul -->
+                        <div class="mb-3">
+                            <label for="judul" class="form-label">Judul Artikel</label>
+                            <input type="text" class="form-control @error('judul') is-invalid @enderror" id="judul" name="judul" placeholder="Masukkan Judul Artikel" required>
+                            @error('judul')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <!-- Gambar (Link) -->
+                        <div class="mb-3">
+                            <label for="gambar" class="form-label">Link Gambar</label>
+                            <input type="url" class="form-control" id="gambar" name="gambar" placeholder="Masukkan Link Gambar" required>
+                        </div>
+
+                        <!-- Video (Link) -->
+                        <div class="mb-3">
+                            <label for="video" class="form-label">Link Video</label>
+                            <input type="url" class="form-control" id="video" name="video" placeholder="Masukkan Link Video" required>
+                        </div>
+
+                        <!-- Konten dengan WYSIWYG Editor -->
+                        <div class="mb-3">
+                            <label for="konten" class="form-label">Konten Artikel</label>
+                            <textarea class="form-control" id="konten" name="konten" placeholder="Masukkan Konten Artikel" required></textarea>
+                            
+                        </div>
+
+                        <!-- Penulis -->
+                        <div class="mb-3">
+                            <label for="penulis" class="form-label">Penulis</label>
+                            <input type="text" class="form-control" id="penulis" name="penulis" placeholder="Masukkan Nama Penulis" required>
+                        </div>
+
+                        <!-- Editor -->
+                        <div class="mb-3">
+                            <label for="editor" class="form-label">Editor</label>
+                            <input type="text" class="form-control" id="editor" name="editor" placeholder="Masukkan Nama Editor" required>
+                        </div>
+
+                        <!-- Tombol Submit -->
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-success btn-lg">Submit Artikel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use App\Models\Artikel;
+use Illuminate\Http\Request;
 
 
 class menusController extends Controller
@@ -12,7 +12,7 @@ class menusController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $trendingnow = DB::table('artikel')
         ->join('kategori', 'artikel.kategori_idkategori', '=', 'kategori.idkategori')
@@ -26,27 +26,38 @@ class menusController extends Controller
             ->join('kategori', 'artikel.kategori_idkategori', '=', 'kategori.idkategori')
             ->select('beritautama.*', 'artikel.judul', 'artikel.image', 'kategori.nama as kategori')
             ->get();
-
         // dd($berita_utama);
         $berita_video = DB::table('artikel')
                        ->whereNotNull('video')
                        ->get();
-        // dd($berita_video);
         
-    
-        $kategori = DB::table('artikel')
-            ->join('kategori', 'artikel.kategori_idkategori', '=', 'kategori.idkategori')
-            ->select('artikel.judul', 'artikel.image', 'kategori.nama as kategori')
-            ->where('kategori.status', 'true')
-            ->get();
-
-        // Debugging, cek apakah $beritautama ada
+        $pilihkategori = $request->query('page'); // Mendapatkan kategori dari query string
+        // dd($request->all());
+        if ($pilihkategori) {
+            // Mengambil artikel yang sesuai dengan kategori
+            $kategori = DB::table('artikel')
+                ->join('kategori', 'artikel.kategori_idkategori', '=', 'kategori.idkategori')
+                ->select('artikel.judul', 'artikel.image', 'kategori.nama as kategori')
+                ->where('kategori.status', 'true')
+                ->where('kategori.nama', $pilihkategori) // Menggunakan $pilihkategori di sini
+                ->get();
+        } else {
+            // Jika tidak ada kategori yang dipilih, ambil semua artikel
+            $kategori = DB::table('artikel')
+                ->join('kategori', 'artikel.kategori_idkategori', '=', 'kategori.idkategori')
+                ->select('artikel.judul', 'artikel.image', 'kategori.nama as kategori')
+                ->where('kategori.status', 'true')
+                ->get();
+        }
         // dd($kategori);
-    
-        return view('website.user.layout', compact('trendingnow','berita_utama','kategori','berita_video'));
+        // dd($pilihkategori); // Akan menampilkan kategori yang diambil dari query string
+        $berita_utama = DB::table('artikel')->get(); // Ambil data berita utama
+        // dd($berita_utama); // Periksa data yang dikirim ke view
+        return view('website.user.layout', compact('trendingnow', 'berita_utama', 'berita_video','kategori'));
+        
     }
     
-
+  
     /**
      * Show the form for creating a new resource.
      */
@@ -60,25 +71,19 @@ class menusController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $inputan = $request->all();
+        dd($inputan);
+        
     }
-
     /**
      * Display the specified resource.
      */
 
-    public function show($page)
+    public function show($id)
     {
-        // Ambil semua menu dari tabel 'menus' menggunakan query builder
-        $menus = DB::table('menus')->get();
-    
-        // Periksa apakah view dengan nama yang sesuai ada
-        if (view()->exists($page)) {
-            return view($page, compact('menus'));
-        }
-    
-        // Jika view tidak ditemukan, tampilkan halaman 404
-        abort(404);
+        // $artikel = Artikel::where('idartikel', $idartikel)->get();
+        $artikel = Artikel::findOrFail($id);
+        return view('website.user.layout', compact('artikel'));
     }
     
 

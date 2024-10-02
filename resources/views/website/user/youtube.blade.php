@@ -31,7 +31,7 @@
                         <div class="single-video">
                             <iframe  src="{{$item->video}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             <div class="video-intro">
-                                <h4>Welcotme To The Best Model Winner Contest</h4>
+                                <h4>{{$item->judul}}</h4>
                             </div>
                         </div>
                         @endforeach

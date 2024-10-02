@@ -42,38 +42,32 @@
                   id="basic-datatables"
                   class="display table table-striped table-hover"
                 >
-                  <thead>
-                    <tr>
+                <thead>
+                  <tr>
                       <th>No</th>
                       <th>Judul</th>
                       <th>konten</th>
                       <th>tgl dibuat</th>
                       <th>kategori</th>
                       <th>status</th>
-                      
-                    </tr>
-                  </thead>
-                  {{-- <tfoot>
-                    <tr>
-                      <th>Name</th>
-                      <th>Position</th>
-                      <th>Office</th>
-                      <th>Age</th>
-                      <th>Start date</th>
-                      <th>Salary</th>
-                    </tr>
-                  </tfoot> --}}
-                  <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>Perkembangan teknologi di indonesia</td>
-                      <td>Edinburgh</td>
-                      <td>26 agustus</td>
-                      <td>teknologi</td>
-                      <td>cek editor</td>
-                    </tr>
-                
-                  </tbody>
+                  </tr>
+              </thead>
+              <tbody>
+                  @foreach ($artikel as $item)
+                      @php
+                          $no = 1;
+                      @endphp
+                      <tr>
+                          <td>{{ $no++ }}</td>
+                          <td>{{ $item->judul }}</td>
+                          <td>{{ $item->konten}}</td>
+                          <td>{{ $item->create_at}}</td>
+                          <td>{{ $item->kategori}}</td>
+                          <td>{{ $item->status}}</td>
+
+                      </tr>
+                  @endforeach
+              </tbody>
                 </table>
               </div>
             </div>

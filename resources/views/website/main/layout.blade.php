@@ -1023,6 +1023,17 @@
   });
   
 </script>
-<script src="https://cdn.jsdelivr.net/npm/@tinymce/tinymce-webcomponent@2/dist/tinymce-webcomponent.min.js"></script>
-  </body>
+<script src="https://cdn.tiny.cloud/1/o6h7op7hz9u72d0xyvnui97n6x13gb6zikwggqbe6ysxv8ga/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+  tinymce.init({
+      selector: '#konten',  // ID dari textarea untuk konten
+      height: 300,  // Atur tinggi editor
+      plugins: 'lists link image preview fullscreen',  // Tambahkan plugin fullscreen
+      toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | fullscreen',  // Tombol fullscreen
+      menubar: false,
+      branding: false  // Menghilangkan branding TinyMCE
+  });
+</script>
+
+</body>
 </html>

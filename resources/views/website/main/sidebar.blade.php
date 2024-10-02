@@ -29,39 +29,27 @@
       <div class="sidebar-content">
         <ul class="nav nav-secondary">
           <li class="nav-item">
-            <a
-              data-bs-toggle="collapse"
-              href="#dashboard"
-              class="collapsed"
-              aria-expanded="false"
-            >
+            <a data-bs-toggle="collapse" href="#base">
+              <a  href="{{ url('/dashboardjurnalis') }}">
               <i class="fas fa-home"></i>
               <p>Dashboard</p>
-              <span class="caret"></span>
-            </a>
-            <div class="collapse" id="dashboard">
-              <ul class="nav nav-collapse">
-                <li>
-                  <a href="../demo1/index.html">
-                    <span class="sub-item">Dashboard 1</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
+               </a>
           </li>
-          <li class="nav-section">
-            <span class="sidebar-mini-icon">
-              <i class="fa fa-ellipsis-h"></i>
-            </span>
-            <h4 class="text-section">Components</h4>
-          </li>
+
           <li class="nav-item">
-            <a data-bs-toggle="collapse" href="#base">
+            <a  href="{{ url('/artikel')}}">
               <i class="fas fa-layer-group"></i>
               <p>Artikel Saya</p>
-              <span class="caret"></span>
             </a>
-            <div class="collapse" id="base">
+            <a  href="{{ url('/form-input') }}">
+              <i class="fas fa-layer-group"></i>
+              <p>Form input</p>
+            </a>
+              
+
+            {{-- <a href="{{ url('/form-input') }}">Form input</a> --}}
+
+            {{-- <div class="collapse" id="base">
               <ul class="nav nav-collapse">
                 <li>
                   <a href="components/avatars.html">
@@ -109,7 +97,7 @@
                   </a>
                 </li>
               </ul>
-            </div>
+            </div> --}}
           </li>
           {{-- <li class="nav-item active submenu">
             <a data-bs-toggle="collapse" href="#sidebarLayouts">
@@ -132,7 +120,7 @@
               </ul>
             </div>
           </li> --}}
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a data-bs-toggle="collapse" href="#forms">
               <i class="fas fa-pen-square"></i>
               <p>Forms</p>
@@ -275,7 +263,7 @@
                 </li>
               </ul>
             </div>
-          </li>
+          </li> --}}
         </ul>
       </div>
     </div>

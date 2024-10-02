@@ -28,15 +28,17 @@
 
     @include('website.user.header')
     @include('website.user.home')
-    @include('website.user.youtube')
+    {{-- @include('website.user.youtube') --}}
     @include('website.user.category')
-    {{-- @include('website.user.about') --}}
-    {{-- @include('website.user.contact') --}}
+    @include('website.user.about')
+    @include('website.user.contact')
+   
+
 
 
 
     <main>
-        {{-- @yield('content') --}}
+        @yield('content')
     
         
     </main>
@@ -140,7 +142,51 @@
    </footer>
    
 	<!-- JS here -->
-	
+	<!-- Content of the page -->
+    <script>
+        // API key dari OpenWeatherMap
+        const apiKey = '58eeab2446342ea74e69baf8213ac725';
+        
+        // Mendapatkan tanggal saat ini
+        const date = new Date();
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('current-date').textContent = date.toLocaleDateString('id-ID', options);
+        
+        // Mendapatkan lokasi dan suhu menggunakan OpenWeatherMap
+        function getWeather(lat, lon) {
+            const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+            
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('location').textContent = data.name; // Nama kota
+                    document.getElementById('temperature').textContent = `${Math.round(data.main.temp)}º`; // Suhu
+                })
+                .catch(error => {
+                    console.log('Error:', error);
+                    document.getElementById('location').textContent = 'Gagal mendapatkan lokasi';
+                });
+        }
+        
+        // Menggunakan Geolocation API untuk mendapatkan koordinat pengguna
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                position => {
+                    const lat = position.coords.latitude;
+                    const lon = position.coords.longitude;
+                    getWeather(lat, lon); // Panggil fungsi untuk mendapatkan cuaca
+                },
+                error => {
+                    console.log('Error getting location:', error);
+                    document.getElementById('location').textContent = 'Gagal mendapatkan lokasi';
+                }
+            );
+        } else {
+            document.getElementById('location').textContent = 'Geolocation tidak didukung di browser ini';
+        }
+    </script>
+        
+    
 		<!-- All JS Custom Plugins Link Here here -->
         <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
 		<!-- Jquery, Popper, Bootstrap -->
@@ -179,6 +225,7 @@
 		<!-- Jquery Plugins, main Jquery -->	
         <script src="./assets/js/plugins.js"></script>
         <script src="./assets/js/main.js"></script>
+        
         
     </body>
 </html>

@@ -7,10 +7,18 @@
                    <div class="col-xl-12">
                         <div class="row d-flex justify-content-between align-items-center">
                             <div class="header-info-left">
-                                <ul>     
-                                    <li><img src="assets/img/icon/header_icon1.png" alt="">34ºc, Sunny </li>
-                                    <li><img src="assets/img/icon/header_icon1.png" alt="">Tuesday, 18th June, 2019</li>
+                                <ul>
+                                    <li id="location">Gagal mendapatkan lokasi</li>
+                                    <li>
+                                        <img src="assets/img/icon/header_icon1.png" alt="" id="temperature-icon">
+                                        <span id="temperature">0º</span>
+                                    </li>
+                                    <li>
+                                        <img src="assets/img/icon/header_icon1.png" alt="" id="date-icon">
+                                        <span id="current-date">k</span>
+                                    </li>
                                 </ul>
+                                
                             </div>
                             <div class="header-info-right">
                                 <ul class="header-social">    

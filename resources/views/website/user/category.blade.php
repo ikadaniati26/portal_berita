@@ -14,13 +14,13 @@
                             <nav>                                                                     
                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                     <a class="nav-item nav-link active" id="nav-home-tab" href="{{ url('/index?page=home') }}" role="tab" aria-controls="nav-home" aria-selected="true">All</a>
-                                    <a class="nav-item nav-link" id="nav-lifestyle-tab" href="{{ url('/index?page=lifestyle') }}" role="tab" aria-controls="nav-profile" aria-selected="false">Lifestyle</a>
-                                    <a class="nav-item nav-link" id="nav-beauty-tab" href="{{ url('/index?page=beauty') }}" role="tab" aria-controls="nav-profile" aria-selected="false">Beauty</a>
-                                    <a class="nav-item nav-link" id="nav-travel-tab" href="{{ url('/index?page=travel') }}" role="tab" aria-controls="nav-contact" aria-selected="false">Travel</a>
-                                    <a class="nav-item nav-link" id="nav-fashion-tab" href="{{ url('/index?page=fashion') }}" role="tab" aria-controls="nav-contact" aria-selected="false">Fashion</a>
-                                    <a class="nav-item nav-link" id="nav-technology-tab" href="{{ url('/index?page=technology') }}" role="tab" aria-controls="nav-contact" aria-selected="false">Technology</a>
+                                    <a class="nav-item nav-link" id="nav-lifestyle-tab" href="{{ url('/?page=lifestyle#category') }}" role="tab" aria-controls="nav-profile" aria-selected="false">Lifestyle</a>
+                                    <a class="nav-item nav-link" id="nav-beauty-tab" href="{{ url('/?page=beauty#category') }}" role="tab" aria-controls="nav-profile" aria-selected="false">Beauty</a>
+                                    <a class="nav-item nav-link" id="nav-travel-tab" href="{{ url('/?page=elektronik#category') }}" role="tab" aria-controls="nav-contact" aria-selected="false">elektronik</a>
+                                    <a class="nav-item nav-link" id="nav-fashion-tab" href="{{ url('/?page=lifestyle#category') }}') }}" role="tab" aria-controls="nav-contact" aria-selected="false">Fashion</a>
                                 </div>
                             </nav>
+                            
                             
                             <!--End Nav Button  -->
                         </div>
@@ -33,7 +33,7 @@
                             <!-- card one -->
                             <div class="whats-news-caption">
                                 <div class="row">
-                                    {{-- @foreach($kategori as $item)
+                                    @foreach($kategori as $item)
                                         <div class="col-lg-6 col-md-6">
                                             <div class="single-what-news mb-100">
                                                 <div class="what-img">
@@ -48,7 +48,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    @endforeach --}}
+                                    @endforeach
+                                    
                                 </div>
                             </div>
                         </div>
