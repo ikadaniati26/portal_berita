@@ -16,7 +16,7 @@ class menusController extends Controller
     {
         $trendingnow = DB::table('artikel')
         ->join('kategori', 'artikel.kategori_idkategori', '=', 'kategori.idkategori')
-        ->select('artikel.*', 'kategori.*')->orderBy('create_at','desc')
+        ->select('artikel.*', 'kategori.*')->orderBy('created_at','desc')
         ->where('kategori.status', 'true')
         ->whereNull('artikel.video')
         ->get();
@@ -63,18 +63,15 @@ class menusController extends Controller
      */
     public function create()
     {
-        //
+        // Mengembalikan view yang menampilkan form input artikel
+        return view('website.jurnalis.forminputartikel');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        $inputan = $request->all();
-        dd($inputan);
-        
-    }
+    
+    
     /**
      * Display the specified resource.
      */

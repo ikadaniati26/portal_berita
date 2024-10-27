@@ -14,13 +14,13 @@
              @csrf
             <div class="mb-3">
                 <label for="judul" class="form-label">Judul Artikel:</label>
-                <input type="text" class="form-control" id="judul" name="judul" >
+                <input type="text" class="form-control" id="judul" name="judul" value="{{isset($query->judul)?$query->judul : ''}}">
                 @error('judul')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
 
-            <div class="mb-3">
+            {{-- <div class="mb-3">
                 <label for="image" class="form-label">URL Gambar:</label>
                 <input type="text" class="form-control" id="image" name="image" placeholder="https://example.com/image.jpg" value="{{ old('image') }}">
                 @error('image')
@@ -28,7 +28,7 @@
                 @enderror
             </div>
 
-            <div class="mb-3">
+            {{-- <div class="mb-3">
                 <label for="video" class="form-label">URL Video (Opsional):</label>
                 <input type="text" class="form-control" id="video" name="video" placeholder="https://example.com/video.mp4" value="{{ old('video') }}">
                 @error('video')
@@ -46,7 +46,7 @@
 
             <div class="mb-3">
                 <label for="status" class="form-label">Status:</label>
-                <input type="hidden" class="form-control" id="status" name="status" value="">
+                <input type="hidden" class="form-control" id="status" name="status" value="cek editor">
                 @error('status')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
@@ -54,27 +54,28 @@
     
             <div class="mb-3">
                 <label for="kategori_idkategori" class="form-label">Kategori:</label>
-                <select class="form-control" id="kategori_idkategori" name="kategori_idkategori">
-                    <option value="">Pilih Kategori</option>
-                    @foreach($kategori as $k)
-                        <option value="{{ $k->idkategori }}" {{ old('kategori_idkategori') == $k->idkategori ? 'selected' : '' }}>
-                            {{ $k->nama }}
-                        </option>
-                    @endforeach
-                </select>
+                <input type="text" class="form-control" id="kategori_idkategori" name="kategori_idkategori" value="{{ old('kategori_idkategori') }}">
                 @error('kategori_idkategori')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
-            
     
             <div class="mb-3">
                 <label for="penulis" class="form-label">Penulis:</label>
-                <input type="text" class="form-control" id="penulis" name="penulis" value="{{ auth()->user()->username }}" readonly>
+                <input type="text" class="form-control" id="penulis" name="penulis" value="{{ old('penulis') }}">
+                @error('penulis')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
-            
-           
-            <button type="submit" class="btn btn-primary">Submit</button>
+
+            <div class="mb-3">
+                <label for="editor" class="form-label">Editor</label>
+                <input type="text" class="form-control" id="editor" name="editor" value="{{ old('editor') }}">
+                @error('editor')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div> --}} 
+            <button type="submit" class="btn btn-primary">Simpan Artikel</button>
         </form>
         </div>
     </div>

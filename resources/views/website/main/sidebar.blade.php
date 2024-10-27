@@ -30,75 +30,34 @@
         <ul class="nav nav-secondary">
           <li class="nav-item">
             <a data-bs-toggle="collapse" href="#base">
-              <a  href="{{ url('/dashboardjurnalis') }}">
-              <i class="fas fa-home"></i>
-              <p>Dashboard</p>
-               </a>
-          </li>
+                @if (auth()->user()->role === 'jurnalis')
+                    <a href="{{ url('/dashboardjurnalis') }}">
+                        <i class="fas fa-home"></i>
+                        <p>Dashboard Jurnalis</p>
+                    </a>
+                @elseif (auth()->user()->role === 'editor')
+                    <a href="{{ url('/dashboardeditor') }}">
+                        <i class="fas fa-home"></i>
+                        <p>Dashboard Editor</p>
+                    </a>
+                @endif
+            </a>
+        </li>
+        
 
+         
           <li class="nav-item">
-            <a  href="{{ url('/artikel')}}">
-              <i class="fas fa-layer-group"></i>
-              <p>Artikel Saya</p>
-            </a>
-            <a  href="{{ url('/form-input') }}">
-              <i class="fas fa-layer-group"></i>
-              <p>Form input</p>
-            </a>
-              
-
-            {{-- <a href="{{ url('/form-input') }}">Form input</a> --}}
-
-            {{-- <div class="collapse" id="base">
-              <ul class="nav nav-collapse">
-                <li>
-                  <a href="components/avatars.html">
-                    <span class="sub-item"></span>
-                  </a>
-                </li>
-                <li>
-                  <a href="components/buttons.html">
-                    <span class="sub-item">Buttons</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="components/gridsystem.html">
-                    <span class="sub-item">Grid System</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="components/panels.html">
-                    <span class="sub-item">Panels</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="components/notifications.html">
-                    <span class="sub-item">Notifications</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="components/sweetalert.html">
-                    <span class="sub-item">Sweet Alert</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="components/font-awesome-icons.html">
-                    <span class="sub-item">Font Awesome Icons</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="components/simple-line-icons.html">
-                    <span class="sub-item">Simple Line Icons</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="components/typography.html">
-                    <span class="sub-item">Typography</span>
-                  </a>
-                </li>
-              </ul>
-            </div> --}}
+            @if(auth()->user()->role === 'jurnalis')
+              <a href="{{ url('/artikel') }}">
+                  <i class="fas fa-layer-group"></i>
+                  <p>Artikel Saya</p>
+              </a>
+              <a href="{{ url('/form-input') }}">
+                  <i class="fas fa-layer-group"></i>
+                  <p>Form Input</p>
+              </a>
           </li>
+          @endif
           {{-- <li class="nav-item active submenu">
             <a data-bs-toggle="collapse" href="#sidebarLayouts">
               <i class="fas fa-th-list"></i>

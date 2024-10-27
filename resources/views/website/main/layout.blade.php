@@ -42,7 +42,7 @@
     <link rel="stylesheet" href="{{asset('assets/css/demo.css')}}" />
 
     <script src="https://cdn.tiny.cloud/1/api_key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   </head>
   <body>
     <div class="wrapper">

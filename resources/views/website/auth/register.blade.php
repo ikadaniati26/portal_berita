@@ -36,13 +36,13 @@
         }
         .input-group input,
         .input-group select {
-            width: 100%;
+            width: 80%;
             padding: 15px 20px;
             padding-left: 50px;
             border: 1px solid #ddd;
             border-radius: 50px;
             font-size: 16px;
-            transition: all 0.3s ease;
+            /* transition: all 0.3s ease; */
         }
         .input-group input:focus,
         .input-group select:focus {
@@ -87,28 +87,68 @@
 </head>
 <body>
     <div class="login-container">
-        <h1>Selamat Datang di Portal Berita</h1>
-        <form>
+        <h1>Registrasi akun</h1>
+        <form action="{{ route('proses-register') }}" method="POST">
+            @csrf
             <div class="input-group">
                 <i class="fas fa-envelope icon"></i>
-                <input type="email" placeholder="Email" required>
+                <input type="text" placeholder="Username" name="username">
+            </div>
+            <div class="input-group">
+                <i class="fas fa-envelope icon"></i>
+                <input type="email" placeholder="Email" name="email">
+            </div>
+           
+            <div class="input-group">
+                <i class="fas fa-lock icon"></i>
+                <input type="password" placeholder="Password" name="password" required>
             </div>
             <div class="input-group">
                 <i class="fas fa-lock icon"></i>
-                <input type="password" placeholder="Password" required>
+                <input type="password" placeholder="Confirm Password" name="password_confirmation" required>
             </div>
             <div class="input-group">
-                <i class="fas fa-user icon"></i>
-                <select required>
-                    <option value="">Login Sebagai</option>
+                <label for="jabatan">Jabatan:</label>
+                <select name="role" id="jabatan" required>
+                    <option value="">Pilih Jabatan</option>
                     <option value="jurnalis">Jurnalis</option>
                     <option value="editor">Editor</option>
                     <option value="admin">Admin</option>
                 </select>
             </div>
-            <input type="submit" value="Login">
-            <a href="#">Lupa Password?</a>
+            <input type="submit" value="Register">
+            
+            
+            
+            
+            
+            
+            
+            
+            @if ($errors->any())
+            <div>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        
+        @if (session('error'))
+            <div>{{ session('error') }}</div>
+        @endif
+        
+        @if (session('success'))
+            <div>{{ session('success') }}</div>
+        @endif
+        
         </form>
+
+        @php
+        
+@endphp
+
     </div>
 </body>
 </html>

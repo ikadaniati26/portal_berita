@@ -16,12 +16,15 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    protected $table = 'akun'; // Nama tabel yang digunakan
     protected $fillable = [
-        'name',
+        'username',
         'email',
         'password',
+        'role'
     ];
-
+  // Mematikan fitur timestamps
+  public $timestamps = false; // Tambahkan ini untuk mematikan timestamps
     /**
      * The attributes that should be hidden for serialization.
      *

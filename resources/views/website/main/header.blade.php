@@ -328,15 +328,19 @@
             >
               <div class="avatar-sm">
                 <img
-                  src="assets/img/profile.jpg"
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYM98781xZSLJk_M6NEM5SiAdRZgj6DaTy_Q&s"
                   alt="..."
                   class="avatar-img rounded-circle"
                 />
               </div>
               <span class="profile-username">
-                <span class="op-7">Hi,</span>
-                <span class="fw-bold">Hizrian</span>
-              </span>
+                @if(Auth::check())
+                    <span class="op-7">Hi, {{ Auth::user()->username }}</span>
+                @else
+                    <h1>Hi, Guest</h1>
+                @endif
+            </span>
+            
             </a>
             <ul class="dropdown-menu dropdown-user animated fadeIn">
               <div class="dropdown-user-scroll scrollbar-outer">
@@ -350,13 +354,15 @@
                       />
                     </div>
                     <div class="u-text">
-                      <h4>Hizrian</h4>
-                      <p class="text-muted">hello@example.com</p>
-                      <a
-                        href="profile.html"
-                        class="btn btn-xs btn-secondary btn-sm"
-                        >View Profile</a
-                      >
+                      <h4>      
+                      
+                      </h4>
+                      @if(session('user'))
+                      <p class="text-muted">{{ session('user')->email }}</p>
+                  @endif
+
+                      <a href="{{ url('/profile') }}" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
+
                     </div>
                   </div>
                 </li>

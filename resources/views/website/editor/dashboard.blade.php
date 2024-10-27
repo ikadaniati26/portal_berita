@@ -4,6 +4,10 @@
 
 <div class="container">
     <div class="page-inner">
+   <!-- Notifikasi Jumlah Artikel Baru -->
+    <div class="alert alert-info" role="alert">
+    Anda memiliki <strong>{{ $artikelBaru }}</strong> artikel yang perlu segera dicek. <a href="{{ route('artikel.dashboard')}}" style="color: red">Lihat Sekarang</a>
+    </div>
       <div
         class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4"
       >
@@ -16,6 +20,8 @@
           <a href="#" class="btn btn-primary btn-round">Add Customer</a>
         </div>
       </div>
+    
+    
       <div class="row">
         <div class="col-sm-6 col-md-3">
           <div class="card card-stats card-round">

@@ -62,7 +62,7 @@
                   @php
                       $no = 1;
                   @endphp
-                  @foreach ($artikel as $item)
+                  @foreach ($daftarArtikel as $item)
                       <tr>
                           <td>{{ $no++ }}</td>
                           <td>{{ $item->judul }}</td>
@@ -79,14 +79,14 @@
                               <form method="POST" action="">
                                   @csrf
                                   @method('DELETE')
-                                  <a href="" class="btn btn-primary btn-sm">
-                                    <i class="fas fa-eye"></i> <!-- Ikon mata -->
-                                </a>
+                                  <a href="" class="btn btn-info btn-sm">
+                                    <i class="fa-solid fa-eye"></i>
+                                  </a>
                                   <a class="btn btn-warning btn-sm" title="Edit"
                                       href="=">
                                       <i class="fa-solid fa-pencil"></i>
                                   </a>
-                                  {{-- &nbsp; --}}
+                                  
                                   <button type="submit" class="btn btn-danger btn-sm"
                                       title="Hapus Pegawai"
                                       onclick="return confirm('Anda Yakin Data akan diHapus?')">
