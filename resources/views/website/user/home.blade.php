@@ -1,6 +1,6 @@
 
 <!-- Trending Area Start -->
-    <div class="trending-area fix">
+    <div class="trending-area fix" id="home">
         <div class="container">
             <div class="trending-main">
 
@@ -28,16 +28,14 @@
                        <!-- Trending Top 1 -->
                     <div class="trending-top mb-30">
                         <div class="trend-top-img">
-                            {{-- <img src="assets/img/trending/trending_top.jpg" alt=""> --}}
-                            {{-- <img src="{{ isset($berita_utama[0]->image) ? $berita_utama[0]->image : 'tidak ada berita' }}" alt=""> --}}
-                            <a href="">
+                            <a href="{{ route('detail', ['id'=>10]) }}">
                                 <img src="{{ isset($berita_utama[0]->image) ? $berita_utama[0]->image : 'tidak ada berita' }}" alt="">
                             </a>
                             
                             <div class="trend-top-cap">
                                 <span>{{isset($berita_utama[0]->kategori) ? $berita_utama[0]->kategori : 'Tiak ada konten'}}</span>
 
-                                <h2><a href="">{{isset($berita_utama[0]->judul) ? $berita_utama[0]->judul : '' }}</a></h2>
+                                <h2><a href="{{ route('detail', ['id'=>10]) }}">{{isset($berita_utama[0]->judul) ? $berita_utama[0]->judul : '' }}</a></h2>
                             </div>
                         </div>
                     </div>

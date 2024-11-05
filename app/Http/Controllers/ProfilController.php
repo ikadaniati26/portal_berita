@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
 use Illuminate\Http\Request;
+use App\Models\DataPengguna;
 
 class ProfilController extends Controller
 {
@@ -54,11 +54,13 @@ class ProfilController extends Controller
      */
     public function show()
     {
-        // $user = Auth::user();//ambil data pengguna yang sedang login
-        // $pengguna = DB::table('pengguna')->get();
-        // // dd($pengguna);
-        // return view('website.main.profil',compact('user','pengguna'));//kirim data pengguna ke view
+        $user = Auth::user();
+
+        $pengguna = DataPengguna::where('akun_idpengguna', $user->id)->first();
+        return view('website.main.profil', compact('user', 'pengguna'));
     }
+    
+
 
     /**
      * Show the form for editing the specified resource.

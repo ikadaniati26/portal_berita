@@ -1,4 +1,4 @@
-    <section class="whats-news-area pt-50 pb-20">
+    <section class="whats-news-area pt-50 pb-20" id="category">
         <div class="container">
             <div class="row">
             <div class="col-lg-8">
@@ -36,13 +36,17 @@
                                     @foreach($kategori as $item)
                                         <div class="col-lg-6 col-md-6">
                                             <div class="single-what-news mb-100">
-                                                <div class="what-img">
-                                                    <!-- Menampilkan gambar dari database -->
-                                                    <img src="{{ $item->image }}" alt="{{ $item->judul }}">
+                                                <div class="what-img"> 
+                                                    <a href="">
+                                                        
+                                                        <img src="{{ $item->image }}" alt="{{ $item->judul }}">
+                                                    </a>
                                                 </div>
+                                                
+                                                
                                                 <div class="what-cap">
                                                     <!-- Menampilkan kategori dari artikel -->
-                                                    <span class="color1">{{ $item->kategori }}</span>
+                                                    <span class="color1"></span>
                                                     <!-- Menampilkan judul artikel -->
                                                     <h4><a href="#">{{ $item->judul }}</a></h4>
                                                 </div>

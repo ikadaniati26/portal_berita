@@ -11,4 +11,11 @@ class Artikel extends Model
     protected $table = 'artikel'; 
     protected $fillable = ['idartikel','judul', 'image', 'video', 'konten', 'status','kategori_idkategori','penulis','editor', 'updated_at'];
 
+    // Definisikan relasi dengan Kategori
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class, 'id_kategori'); // Sesuaikan dengan nama kolom foreign key di tabel Artikel
+    }
 }
+
+

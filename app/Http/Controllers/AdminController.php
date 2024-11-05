@@ -12,7 +12,25 @@ class AdminController extends Controller
 
     public function index()
     {
-        $artikel = Artikel::all();
+        // $artikel = Artikel::all();
+        // Mengambil semua data artikel beserta data kategori terkait
+        $artikel = Artikel::select(
+            'artikel.idartikel',
+            'artikel.judul', 
+            'artikel.image', 
+            'artikel.video', 
+            'artikel.konten', 
+            'artikel.status', 
+            'artikel.created_at', 
+            'artikel.updated_at', 
+            'artikel.penulis', 
+            'artikel.editor', 
+            'kategori.nama AS nama'
+        )
+        ->join('kategori', 'artikel.kategori_idkategori', '=', 'kategori.idkategori')
+        ->where('artikel.status','like','draft')
+        ->get();
+
         return view('website.jurnalis.artikel', compact('artikel')); 
 
     }
@@ -21,7 +39,8 @@ class AdminController extends Controller
     public function create()
     {
         // Mengambil kategori dengan status false
-        $kategori = Kategori::where('status', 'false')->get();
+        $kategori = Kategori::where('status', 'true')->get();
+        // dd($kategori);
         // dd($kategori); // Ini akan menampilkan isi dari koleksi        
         return view('website.jurnalis.forminputartikel',compact('kategori'));
     }
@@ -40,7 +59,7 @@ class AdminController extends Controller
             'editor.max' => 'Nama editor tidak boleh lebih dari 255 karakter.'
         ];
         //validasi input
-         $validatedData = $request->validate([
+         $request->validate([
             'judul' => 'required|max:10',
             'image' => 'nullable', 
             'video' => 'nullable', 
@@ -51,60 +70,163 @@ class AdminController extends Controller
         ], $message);
         // dd($request->all());
 
-        // Setelah validasi, set status secara otomatis
-        $validatedData['status'] = 'cek editor';
 
-    
+        if($request->action == 'submit'){
+            $status='cek editor';
+        }else{
+            $status='draft';
+        }
+       
         // Simpan data ke database
-        Artikel::create($validatedData); //dapat langsung menggunakan $validateData
+        Artikel::create([
+            'judul' => $request->judul,
+            'image' => $request->image,
+            'video' => $request->video,
+            'konten' => $request->konten,
+            'status' => $status,
+            'kategori_idkategori' =>$request->kategori_idkategori,
+            'penulis' => $request->penulis,
+            'editor' => $request->editor
+
+        ]); //dapat langsung menggunakan $validateData
 
         // Redirect atau tampilkan pesan sukses
             return redirect('/form-input')->with('success', 'Artikel berhasil dikirim untuk ditinjau oleh editor.');
-        }
+    }
     
 
-        public function show($id)
-        {
-            $artikel = Artikel::findOrFail($id);
-            dd($artikel); // Debugging
-            return view('website.jurnalis.show', compact('artikel'));
-        }
+    public function show($id)
+    {
+        // Mengambil satu artikel berdasarkan ID
+        $artikel = Artikel::select(
+                'artikel.idartikel',
+                'artikel.judul', 
+                'artikel.image', 
+                'artikel.video', 
+                'artikel.konten', 
+                'artikel.status', 
+                'artikel.created_at', 
+                'artikel.updated_at', 
+                'artikel.penulis', 
+                'artikel.editor', 
+                'kategori.nama AS nama'
+            )
+            ->join('kategori', 'artikel.kategori_idkategori', '=', 'kategori.idkategori')
+            ->where('artikel.idartikel', $id) // Mengambil artikel berdasarkan ID
+            ->first(); // Menggunakan first() untuk mendapatkan satu objek artikel
+            
+            // Memeriksa jika artikel ada
+            if (!$artikel) {
+                return redirect()->back()->with('error', 'Article not found.'); // Jika artikel tidak ditemukan
+            }
+        
+            // Mengembalikan tampilan berdasarkan peran pengguna
+            if (auth()->user()->role === 'editor') {
+                return view('website.editor.show', compact('artikel'));
+            } else {
+                return view('website.jurnalis.show', compact('artikel'));
+            }
+    }
+        
         
 
-    public function edit_artikel(string $id)
+    public function editArtikel(string $id)
     {
-        $query = Artikel::where('idartikel', $id)->first();
-        return view('website.jurnalis.artikel', compact('query'));
+       // Mengambil satu artikel berdasarkan ID
+       $artikel = Artikel::select(
+        'artikel.idartikel',
+        'artikel.judul', 
+        'artikel.image', 
+        'artikel.video', 
+        'artikel.konten', 
+        'artikel.status', 
+        'artikel.created_at', 
+        'artikel.updated_at', 
+        'artikel.penulis', 
+        'artikel.editor', 
+        'kategori.nama AS nama'
+    )
+    ->join('kategori', 'artikel.kategori_idkategori', '=', 'kategori.idkategori')
+    ->where('artikel.idartikel', $id) // Mengambil artikel berdasarkan ID
+    ->first(); // Menggunakan first() untuk mendapatkan satu objek artikel
+    
+    $kategori = Kategori::where('status', 'true')->get();
+    // dd($kategori);
+    
+    if (auth()->user()->role === 'editor') {
+            return view('website.editor.formEdit_Artikel', compact('artikel','kategori'));
+        } else {
+            return view('website.jurnalis.formEdit_Artikel', compact('artikel','kategori'));
+        }
+        
     }
 
-    public function dashboardEditor()
+        public function updateArtikel(Request $request, string $id)
     {
-        // Query untuk mendapatkan jumlah artikel yang perlu dicek editor
-        $artikelBaru = Artikel::where('status', 'cek editor')->count();
-        return view('website.editor.dashboard', compact('artikelBaru'));
+        
+        if($request->action == 'submit'){
+            $status='cek editor';
+        }else{
+            $status='draft';
+        }
+       
+        // dd($request->all());
+        // Simpan data ke database
+       $artikel = Artikel::where('idartikel',$id)
+        ->update([
+            'judul' => $request->judul,
+            'image' => $request->image,
+            'video' => $request->video,
+            'konten' => $request->konten,
+            'status' => $status,
+            'penulis' => $request->penulis,
+            'editor' => $request->editor
+
+        ]); 
+
+        // Jika pengguna adalah editor, tambahkan status ke array data yang akan di-update
+    if (auth()->user()->role === 'editor') {
+        $dataToUpdate['status'] = $request->input('status');
     }
 
-    public function artikelEditor()
-    {
-        // Ambil data artikel yang perlu dicek untuk ditampilkan di dashboard    
-        $daftarArtikel = Artikel::where('status', 'cek editor')->get();
-        return view('website.editor.artikel', compact('daftarArtikel'));
+                // Redirect ke halaman dashboard editor dengan pesan sukses
+            if (auth()->user()->role === 'editor') {
+                return redirect('dataartikel')->with('success', 'Artikel berhasil diperbarui');
+            } else {
+                return redirect('artikel')->with('success', 'Artikel berhasil diperbarui');
+
+        }
     }
 
+    
+        public function dashboardEditor()
+        {
+            // Query untuk mendapatkan jumlah artikel yang perlu dicek editor
+            $artikelBaru = Artikel::where('status', 'cek editor')->count();
+            return view('website.editor.dashboard', compact('artikelBaru'));
+        }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+        public function artikelEditor()
+        {
+            // Ambil data artikel yang perlu dicek untuk ditampilkan di dashboard    
+            $daftarArtikel = Artikel::where('status', 'cek editor')->get();
+            return view('website.editor.artikel', compact('daftarArtikel'));
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
+        public function destroyArtikel($id)
+        {
+            $artikel = Artikel::where('idartikel', $id)->delete();
+            if (auth()->user()->role === 'editor') {
+                return redirect('dataartikel')->with('success', 'Berhasil Menghapus data.');
+            } else {
+                return redirect('artikel')->with('success', 'Berhasil Menghapus data.');
+           }
+        }
+        public function dashboard()
+        {
+            $jmlTerbit = Artikel::where('status', 'dipublikasikan')->count();
+            $jmlArtikelcek = Artikel::where('status','cek editor')->count();
+
+            return view('website.jurnalis.dashboard', compact('jmlTerbit','jmlArtikelcek'));
+        }
 }

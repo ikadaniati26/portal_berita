@@ -9,19 +9,18 @@
     <title>Profile Pengguna</title>
     <style>
         .profile-container {
-            margin: 50px;
-            background-color: #eaf0f8;
+            margin: 100px;
+            background-color:white;
             border-radius: 0px;
             padding: 50px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin-top: 0px;
-
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.50);
         }
         .profile-image {
             text-align: center;
         }
         .profile-image img {
-            border-radius: 50%;
+            border-radius: 0%;
             width: 250px;
             height: 250px;
             object-fit: cover;
@@ -37,29 +36,24 @@
     <div class="profile-title">
         <h3>#My Profile</h3>
     <hr>
-    <p>set your name, bio, and other public facing information. Learn more.</p>
+    <p>tetapkan nama Anda, biodata, dan informasi publik lainnya. Pelajari lebih lanjut.</p>
     </div>
     <div class="profile-container row">
        
-        
         <div class="profile-image col-md-4">
-            {{-- @if($pg->profile_photo) --}}
-                <img src="" alt="Foto Profil Pengguna">
-            {{-- @else --}}
-                {{-- <img src="" alt="Default Foto Profil"> --}}
-            {{-- @endif --}}
+            <img src="{{ $pengguna->img }}" alt="Foto Profil Pengguna" class="img-fluid">
         </div>
+    
 
         <div class="profile-details col-md-8">
-            <form action="{{ route('profile_edit') }}" method="POST">
+            <form action="{{ route('profile_show') }}" method="POST">
                 @csrf
-                @foreach ($pengguna as $pg)
                 <div class="form-group">
                     <label for="username"><strong>Nama:</strong></label>
                     <input type="text" id="username" name="username" class="form-control" value="{{ $user->username }}" required>
                 </div>
         
-                <div class="form-group">
+                {{-- <div class="form-group">
                     <label for="email"><strong>Email:</strong></label>
                     <input type="email" id="email" name="email" class="form-control" value="{{ $user->email }}" required>
                 </div>
@@ -67,32 +61,36 @@
                 <div class="form-group">
                     <label for="role"><strong>Role:</strong></label>
                     <input type="text" id="role" name="role" class="form-control" value="{{ $user->role }}" readonly>
-                </div>
+                </div> --}}
         
                 <div class="form-group">
                     <label for="jenis_kelamin"><strong>Jenis Kelamin:</strong></label>
-                    <input type="text" id="jenis_kelamin" name="jenis_kelamin" class="form-control" value="{{ $pg->jenis_kelamin }}" required>
+                    <input type="text" id="jenis_kelamin" name="jenis_kelamin" class="form-control" value="{{ $pengguna->jenis_kelamin }}" required>
                 </div>
         
                 <div class="form-group">
                     <label for="alamat"><strong>Alamat:</strong></label>
-                    <input type="text" id="alamat" name="alamat" class="form-control" value="{{ $pg->alamat }}" required>
+                    <input type="text" id="alamat" name="alamat" class="form-control" value="{{ $pengguna->status_perkawinan }}" required>
                 </div>
-                @endforeach
-        
+
+                <div class="form-group">
+                    <label for="alamat"><strong>Jabatan:</strong></label>
+                    <input type="text" id="alamat" name="alamat" class="form-control" value="{{ $pengguna->jabatan }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="alamat"><strong>Alamat:</strong></label>
+                    <input type="text" id="alamat" name="alamat" class="form-control" value="{{ $pengguna->alamat }}" required>
+                </div>
                 <button type="submit" class="btn btn-success mt-3">Update Profil</button>
             </form>
         
             <!-- Link kembali ke dashboard jurnalis -->
             <a href="{{ url('/dashboardjurnalis') }}" class="btn btn-primary mt-3">Kembali ke Dashboard</a>
         </div>
-        @if (session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
+        
     </div>
-@endif
-    </div>
-{{-- </div> --}}
+
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

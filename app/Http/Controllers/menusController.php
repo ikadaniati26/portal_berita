@@ -67,21 +67,16 @@ class menusController extends Controller
         return view('website.jurnalis.forminputartikel');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    
-    
-    /**
-     * Display the specified resource.
-     */
-
-    public function show($id)
+        // ArtikelController.php
+    public function detail($id)
     {
-        // $artikel = Artikel::where('idartikel', $idartikel)->get();
-        $artikel = Artikel::findOrFail($id);
-        return view('website.user.layout', compact('artikel'));
+        $artikel = Artikel::join('kategori','kategori.idkategori', 'artikel.kategori_idkategori')
+        ->select('artikel.*', 'kategori.nama')
+        ->where('idartikel', 'like', $id)->first();
+        // dd($artikel);
+        return view('website.user.show', compact('artikel')); // Kirim data artikel ke view
     }
+
     
 
     /**

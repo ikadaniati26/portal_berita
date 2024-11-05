@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\DataPengguna;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Http\RedirectResponse;
 
 class AuthController extends Controller
 {
@@ -16,10 +17,14 @@ class AuthController extends Controller
      */
     public function index()
     {
-        $dataLogin = Auth::user();
-        $query = DataPengguna::where('akun_idpengguna',$dataLogin->id)->first();
-        return view('website.main.header', compact('query'))
-        ->with('dataLogin', $dataLogin);
+        // $dataLogin = Auth::user();
+        // $query = DataPengguna::join('akun','akun.id', 'pengguna.akun_idpengguna')
+        // ->select('akun.*', 'pengguna.*')
+        // ->where('akun_idpengguna',$dataLogin->id)->first();
+
+        // dd($query);
+        // return view('website.main.header', compact('query'))
+        // ->with('dataLogin', $dataLogin);
     }
 
     /**
@@ -100,10 +105,11 @@ class AuthController extends Controller
         // Coba autentikasi user
         if (Auth::attempt($credentials)) {
             // Regenerasi session untuk keamanan
-            $request->session()->regenerate();
-    
+            // $request->session()->regenerate();
+            
             // Ambil user yang sedang login
             $user = Auth::user();
+            // dd($user);
     
             // Cek apakah role dari form sesuai dengan role dari database
             if ($user->role !== $roleFromForm) {
@@ -130,7 +136,14 @@ class AuthController extends Controller
         }
     }
     
-        
+    public function Logout(Request $request): RedirectResponse
+    {
+       Auth::logout();
+       $request->session()->invalidate();
+       $request->session()->regenerateToken();
+       return redirect('login');
+    }
+   
     }
         
     
