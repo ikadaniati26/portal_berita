@@ -14,19 +14,22 @@ class menusController extends Controller
      */
     public function index(Request $request)
     {
-        $trendingnow = DB::table('artikel')
-        ->join('kategori', 'artikel.kategori_idkategori', '=', 'kategori.idkategori')
-        ->select('artikel.*', 'kategori.*')->orderBy('created_at','desc')
-        ->where('kategori.status', 'true')
-        ->whereNull('artikel.video')
-        ->get();
+        $trendingnow = DB::table('beritatrending')
+        ->join('artikel', 'beritatrending.artikel_idartikel', '=', 'artikel.idartikel')
+            ->join('kategori', 'artikel.kategori_idkategori', '=', 'kategori.idkategori')
+            ->select('beritatrending.*', 'artikel.judul', 'artikel.image', 'kategori.nama as kategori')
+            ->where('artikel.status', 'dipublikasikan')
+            ->get();
        
         $berita_utama = DB::table('beritautama')
             ->join('artikel', 'beritautama.artikel_idartikel', '=', 'artikel.idartikel')
             ->join('kategori', 'artikel.kategori_idkategori', '=', 'kategori.idkategori')
             ->select('beritautama.*', 'artikel.judul', 'artikel.image', 'kategori.nama as kategori')
+            ->where('artikel.status', 'dipublikasikan')
             ->get();
+
         // dd($berita_utama);
+
         $berita_video = DB::table('artikel')
                        ->whereNotNull('video')
                        ->get();
@@ -40,6 +43,8 @@ class menusController extends Controller
                 ->select('artikel.judul', 'artikel.image', 'kategori.nama as kategori')
                 ->where('kategori.status', 'true')
                 ->where('kategori.nama', $pilihkategori) // Menggunakan $pilihkategori di sini
+                ->where('artikel.status', 'dipublikasikan')
+
                 ->get();
         } else {
             // Jika tidak ada kategori yang dipilih, ambil semua artikel
@@ -47,6 +52,7 @@ class menusController extends Controller
                 ->join('kategori', 'artikel.kategori_idkategori', '=', 'kategori.idkategori')
                 ->select('artikel.judul', 'artikel.image', 'kategori.nama as kategori')
                 ->where('kategori.status', 'true')
+               ->where('artikel.status', 'dipublikasikan')
                 ->get();
         }
         // dd($kategori);

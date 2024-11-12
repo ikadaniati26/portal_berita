@@ -37,7 +37,7 @@
                         <!-- Logo -->
                         <div class="col-xl-3 col-lg-3 col-md-3">
                             <div class="logo">
-                                <a href="index.html"><img src="{{asset('assets2/img/logo/logo.png')}}" alt=""></a>
+                                <a href="index.html"><img src="{{asset('assets2/img/logo/logo1.png')}}" alt=""></a>
                             </div>
                         </div>
                         <div class="col-xl-9 col-lg-9 col-md-9">
@@ -54,16 +54,16 @@
                         <div class="col-xl-10 col-lg-10 col-md-12 header-flex">
                             <!-- sticky -->
                                 <div class="sticky-logo">
-                                    <a href="index.html"><img src="{{asset('assets2/img/logo/logo.png')}}" alt=""></a>
+                                    <a href="index.html"><img src="{{asset('assets2/img/logo/logo1.png')}}" alt=""></a>
                                 </div>
                             <!-- Main-menu -->
                             <div class="main-menu d-none d-md-block">
                                 <nav>                  
                                     <ul id="navigation">    
-                                        <li><a href="#home">Home</a></li>
-                                        <li><a href="#category">Category</a></li>
-                                        <li><a href="#about">About</a></li>
-                                        <li><a href="#contact">Contact</a></li>
+                                        <li><a href="#home">Beranda</a></li>
+                                        <li><a href="#category">Kategori</a></li>
+                                        <li><a href="#about">Tentang Kami</a></li>
+                                        <li><a href="#contact">Kontak</a></li>
                                     </ul>
                                 </nav>
                             </div>

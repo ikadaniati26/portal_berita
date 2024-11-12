@@ -48,11 +48,9 @@
                       <th style="width: 15%">Video</th>
                       <th style="width: 15%">Konten</th>
                       <th style="width: 15%">Status</th>
-                      <th style="width: 15%">Tgl Dibuat</th>
-                      <th style="width: 15%">Tgl Diperbarui</th>
                       <th style="width: 15%">Kategori</th>
                       <th style="width: 15%">Penulis</th>
-                      <th style="width: 15%">Editor</th>
+                      {{-- <th style="width: 15%">Editor</th> --}}
                       <th style="width: 15%">Aksi</th>
                   </tr>
               </thead>
@@ -74,11 +72,9 @@
                             {!! Str::limit(strip_tags($item->konten), 20) !!}
                         </td>                       
                           <td>{{ $item->status}}</td>
-                          <td>{{ $item->created_at}}</td>
-                          <td>{{ $item->updated_at}}</td>
                           <td>{{ $item->nama}}</td>
                           <td>{{ $item->penulis}}</td>
-                          <td>{{ $item->editor}}</td>
+                          {{-- <td>{{ $item->editor}}</td> --}}
                             <td >
                               <form method="POST" action="{{ route('hapus_artikel',['id'=>$item->idartikel])}}">
                                   @csrf

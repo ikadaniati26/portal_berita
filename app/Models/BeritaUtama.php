@@ -5,12 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Kategori extends Model
+class BeritaUtama extends Model
 {
     use HasFactory;
-    protected $table = 'kategori'; 
-    protected $fillable = ['nama','status']; 
-
-     // Nonaktifkan fitur timestamps
+    protected $table = 'beritautama';
+    protected $fillable = ['idberitautama','artikel_idartikel']; 
+    
+  // Nonaktifkan fitur timestamps
   public $timestamps = false;
+
 }

@@ -40,6 +40,16 @@
                         <i class="fas fa-home"></i>
                         <p>Dashboard Editor</p>
                     </a>
+                    <div class="dropdown">
+                      <a class="dropdown-toggle" href="#" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-home"></i>
+                        <p>Kelola Berita</p>
+                      </a>
+                      <ul class="dropdown-menu bg-dark text-white" aria-labelledby="dropdownMenuButton">
+                        <li><a class="dropdown-item text-white" href="{{ url('/berita_utama') }}">Berita Utama</a></li>
+                        <li><a class="dropdown-item text-white" href="{{ url('/berita_trending') }}">Berita Trending</a></li>
+                      </ul>
+                    </div>
                 @endif
             </a>
         </li>

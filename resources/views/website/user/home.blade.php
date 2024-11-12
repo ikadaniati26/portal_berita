@@ -1,9 +1,7 @@
-
 <!-- Trending Area Start -->
     <div class="trending-area fix" id="home">
         <div class="container">
             <div class="trending-main">
-
                 <!-- Trending Tittle -->
                 <div class="row">
                     <div class="col-lg-12">
@@ -21,20 +19,16 @@
                         </div>
                     </div>
                 </div>
-                
                 <div class="row">
                     <div class="col-lg-8">
-
                        <!-- Trending Top 1 -->
                     <div class="trending-top mb-30">
                         <div class="trend-top-img">
                             <a href="{{ route('detail', ['id'=>10]) }}">
                                 <img src="{{ isset($berita_utama[0]->image) ? $berita_utama[0]->image : 'tidak ada berita' }}" alt="">
                             </a>
-                            
                             <div class="trend-top-cap">
-                                <span>{{isset($berita_utama[0]->kategori) ? $berita_utama[0]->kategori : 'Tiak ada konten'}}</span>
-
+                                <span class="color1">{{isset($item->kategori) ? $item->kategori : 'tidak ada konten'}}</span>
                                 <h2><a href="{{ route('detail', ['id'=>10]) }}">{{isset($berita_utama[0]->judul) ? $berita_utama[0]->judul : '' }}</a></h2>
                             </div>
                         </div>
@@ -44,14 +38,13 @@
                         <div class="trending-bottom">
                             <div class="row">
                                 <div class="col-lg-4">
-
                                 <div class="single-bottom mb-35">
                                     <div class="trend-bottom-img mb-30">
                                         <img src="{{ isset($berita_utama[1]->image) ? $berita_utama[1]->image : '' }}" alt="">
                                     </div>
                                     <div class="trend-bottom-cap">
-                                        <span class="color1">{{isset($berita_utama[1]->kategori) ? $berita_utama[1]->kategori : 'Tiak ada konten'}}</span>
-                                        <h4><a href="details.html">{{isset($berita_utama[1]->judul) ? $berita_utama[1]->judul : '' }}</a></h4>
+                                        <span class="color1">{{isset($item->kategori) ? $item->kategori : 'tidak ada konten'}}</span>
+                                        <h4><a href="{{ route('detail', ['id'=>11]) }}">{{isset($berita_utama[1]->judul) ? $berita_utama[1]->judul : '' }}</a></h4>
                                     </div>
                                 </div>
                                 </div>
@@ -61,8 +54,8 @@
                                             <img src="{{isset($berita_utama[2]->image) ? $berita_utama[2]->image : 'tidak ada konten'}}" alt="">
                                         </div>
                                         <div class="trend-bottom-cap">
-                                            <span class="color2">{{isset($berita_utama[2]->kategori) ? $berita_utama[2]->kategori : 'tidak ada konten'}}</span>
-                                            <h4><h4><a href=""></a>{{isset($berita_utama[2]->judul) ? $berita_utama[2]->judul : 'tidak ada konten'}}</h4></h4>
+                                            <span class="color3">{{isset($item->kategori) ? $item->kategori : 'tidak ada konten'}}</span>
+                                            <h4><a href="{{ route('detail', ['id'=>14]) }}"> {{isset($berita_utama[3]->judul) ? $berita_utama[3]->judul : 'tidak ada konten'}}</a></h4>
                                         </div>
                                     </div>
                                 </div>
@@ -72,8 +65,8 @@
                                             <img src="{{isset($berita_utama[3]->image) ? $berita_utama[3]->image : 'tidak ada konten'}}" alt="">
                                         </div>
                                         <div class="trend-bottom-cap">
-                                            <span class="color3">{{isset($berita_utama[3]->kategori) ? $berita_utama[3]->kategori : 'tidak ada konten'}}</span>
-                                            <h4><a href="details.html"> {{isset($berita_utama[3]->judul) ? $berita_utama[3]->judul : 'tidak ada konten'}}</a></h4>
+                                            <span class="color3">{{isset($item->kategori) ? $item->kategori : 'tidak ada konten'}}</span>
+                                            <h4><a href="{{ route('detail', ['id'=>14]) }}"> {{isset($berita_utama[3]->judul) ? $berita_utama[3]->judul : 'tidak ada konten'}}</a></h4>
                                         </div>
                                     </div>
                                 </div>
@@ -94,7 +87,7 @@
                                     </a>
                                 </div>
                                 <div class="trand-right-cap">
-                                    <span class="color1">{{isset($item->nama) ? $item->nama : 'tidak ada konten'}}</span>
+                                    <span class="color1">{{isset($item->kategori) ? $item->kategori : 'tidak ada konten'}}</span>
                                     <h4><a href="">{{isset($item->judul) ? $item->judul : 'tidak ada konten'}}</a></h4>
                                 </div>
                             </div>

@@ -1,4 +1,16 @@
-    <section class="whats-news-area pt-50 pb-20" id="category">
+
+<div class="div" id="category">
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <hr>
+</div>
+   
+   <section class="whats-news-area pt-50 pb-20" >
+
         <div class="container">
             <div class="row">
             <div class="col-lg-8">
@@ -13,14 +25,12 @@
                             <!--Nav Button  -->                                            
                             <nav>                                                                     
                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                    <a class="nav-item nav-link active" id="nav-home-tab" href="{{ url('/index?page=home') }}" role="tab" aria-controls="nav-home" aria-selected="true">All</a>
                                     <a class="nav-item nav-link" id="nav-lifestyle-tab" href="{{ url('/?page=lifestyle#category') }}" role="tab" aria-controls="nav-profile" aria-selected="false">Lifestyle</a>
                                     <a class="nav-item nav-link" id="nav-beauty-tab" href="{{ url('/?page=beauty#category') }}" role="tab" aria-controls="nav-profile" aria-selected="false">Beauty</a>
-                                    <a class="nav-item nav-link" id="nav-travel-tab" href="{{ url('/?page=elektronik#category') }}" role="tab" aria-controls="nav-contact" aria-selected="false">elektronik</a>
-                                    <a class="nav-item nav-link" id="nav-fashion-tab" href="{{ url('/?page=lifestyle#category') }}') }}" role="tab" aria-controls="nav-contact" aria-selected="false">Fashion</a>
+                                    <a class="nav-item nav-link" id="nav-travel-tab" href="{{ url('/?page=elektronik#category') }}" role="tab" aria-controls="nav-contact" aria-selected="false">Elektronik</a>
+                                    <a class="nav-item nav-link" id="nav-fashion-tab" href="{{ url('/?page=tech#category') }}" role="tab" aria-controls="nav-contact" aria-selected="false">Tech</a>
                                 </div>
                             </nav>
-                            
                             
                             <!--End Nav Button  -->
                         </div>
@@ -38,22 +48,18 @@
                                             <div class="single-what-news mb-100">
                                                 <div class="what-img"> 
                                                     <a href="">
-                                                        
                                                         <img src="{{ $item->image }}" alt="{{ $item->judul }}">
                                                     </a>
                                                 </div>
-                                                
-                                                
                                                 <div class="what-cap">
                                                     <!-- Menampilkan kategori dari artikel -->
-                                                    <span class="color1"></span>
+                                                    <span class="color1">{{isset($item->kategori) ? $item->kategori : 'tidak ada konten'}}</span>
                                                     <!-- Menampilkan judul artikel -->
                                                     <h4><a href="#">{{ $item->judul }}</a></h4>
                                                 </div>
                                             </div>
                                         </div>
                                     @endforeach
-                                    
                                 </div>
                             </div>
                         </div>
