@@ -46,6 +46,8 @@
                                 </div>
                                 <div class="about-prea">
                                     <p class="about-pera1 mb-25">{{ $artikel->konten}}</p>
+                                    <p class="about-pera1 mb-25">Penulis : {{ $artikel->penulis}}</p>
+                                    <p class="about-pera1 mb-25">Editor{{ $artikel->editor}}</p>
                                 </div> 
                                 {{-- <div class="section-tittle">
                                     <h3>Unordered list style?</h3>

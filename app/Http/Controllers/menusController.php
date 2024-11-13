@@ -76,6 +76,7 @@ class menusController extends Controller
         // ArtikelController.php
     public function detail($id)
     {
+        // dd($id);
         $artikel = Artikel::join('kategori','kategori.idkategori', 'artikel.kategori_idkategori')
         ->select('artikel.*', 'kategori.nama')
         ->where('idartikel', 'like', $id)->first();

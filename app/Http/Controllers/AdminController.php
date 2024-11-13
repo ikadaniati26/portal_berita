@@ -197,8 +197,11 @@ class AdminController extends Controller
             // Query untuk mendapatkan jumlah artikel yang perlu dicek editor
             $artikelBaru = Artikel::where('status', 'cek editor')->count();
             $kategori = Kategori::all();
-            
-            return view('website.editor.dashboard', compact('artikelBaru','kategori'));
+            $jmlTerbit = Artikel::where('status', 'dipublikasikan')->count();
+            $jmlBu = BeritaUtama::all()->count();
+            $jmlBt = BeritaTrending::all()->count();
+
+            return view('website.editor.dashboard', compact('artikelBaru','kategori','jmlTerbit','jmlBu','jmlBt'));
         }
 
         public function artikelEditor()
@@ -250,8 +253,10 @@ class AdminController extends Controller
             ->join('kategori', 'artikel.kategori_idkategori', '=', 'kategori.idkategori')
             ->where('artikel.status', 'dipublikasikan')
             ->get();
+            // dd($daftarArtikel);
 
             $bU = BeritaUtama::join('artikel', 'beritautama.artikel_idartikel', '=', 'artikel.idartikel')
+            ->join('kategori', 'artikel.kategori_idkategori', '=', 'kategori.idkategori')
             ->select(
                 'beritautama.idberitautama', 
                 'beritautama.artikel_idartikel', 
@@ -262,8 +267,11 @@ class AdminController extends Controller
                 'artikel.status',
                 'artikel.penulis',
                 'artikel.editor',
-                )
+                'kategori.nama as nama'
+            )
+            ->where('artikel.status', 'dipublikasikan')
             ->get();
+            // dd($bU);
             return view('website.editor.beritautama',compact('daftarArtikel','bU'));
         }
 
@@ -306,6 +314,7 @@ class AdminController extends Controller
             // dd($daftarArtikel);
 
             $bT = BeritaTrending::join('artikel', 'beritatrending.artikel_idartikel', '=', 'artikel.idartikel')
+            ->join('kategori', 'artikel.kategori_idkategori', '=', 'kategori.idkategori')
             ->select(
                 'beritatrending.idberitatrending', 
                 'beritatrending.artikel_idartikel', 
@@ -316,6 +325,7 @@ class AdminController extends Controller
                 'artikel.status',
                 'artikel.penulis',
                 'artikel.editor',
+                'kategori.nama AS nama'
                 )
             ->get();
 
